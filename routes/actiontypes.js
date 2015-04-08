@@ -7,8 +7,8 @@ var ActionType = require('../models/index.js').ActionType;
 
 var ActionTypeBuilder = function(req, res, next){
 	var actionType = {
-		action_name: req.body.action_name,
-		action_weight: req.body.action_weight,
+		actionName: req.body.actionName,
+		actionWeight: req.body.actionWeight,
 		publisherId: req.body.publisherId
 	}
 	req.body.actionType = actionType;
@@ -38,8 +38,8 @@ router.route('/:id')
   .put(function(req, res) {
     ActionType.find(req.params.id).then(function(oldActionType) {
       if(!oldActionType) return res.sendStatus(404);
-      oldActionType.setDataValue('action_name', req.body.action_name);
-      oldActionType.setDataValue('action_weight', req.body.action_weight);
+      oldActionType.setDataValue('actionName', req.body.actionName);
+      oldActionType.setDataValue('actionWeight', req.body.actionWeight);
       oldActionType.save();
       res.status(200).json({status: 'updated'}); 
     }, function(err) {
@@ -52,7 +52,7 @@ router.route('/:id')
     ActionType.find(req.params.id).then(function(toBeDeletedActionType) {
       if(!toBeDeletedActionType) return res.sendStatus(404);
       toBeDeletedActionType.destroy();
-      res.status(200).json({status: 'deleted'});
+    res.status(200).json({status: 'deleted'});
     }, function(err) {
       res.status(400).json({status: 'ERROR', message: 'Something went wrong ' + err});
     });
